@@ -29,11 +29,29 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Application</v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-btn icon>
+      <v-menu  offset-y :close-on-content-click="menuClose" :close-on-click="menuClose">
+        <template v-slot:activator="{ on, attrs }">
+        <v-btn icon v-bind="attrs" v-on="on">
           <v-badge overlap dot color="green">
             <v-icon>mdi-bell</v-icon>
           </v-badge>
         </v-btn>
+        </template>
+           <v-list>
+            <v-list-item v-for="n in 5" :key="n">
+              <v-list-item-avatar>
+                <v-img src="https://imgproxy.xopic.de/F1Q76pHTmWqVjzQJZLKQwHnnzRXO1wTZJ2W5MKEks7Q/fit/600/300/ce/false/aHR0cHM6Ly9zMy54/b3BpYy5kZS9vcGVu/c2FwLXB1YmxpYy9j/b3Vyc2VzLzdrMnEw/elhSNkNDbURuTXVC/NVZGZGkvdmlzdWFs/X3YyLmpwZw.jpg"></v-img>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title>Lorem ipsum dolor sit amet consectetur adipisicing elit. </v-list-item-title>
+                <v-list-item-subtitle v-text="new Date().toLocaleString()"></v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-action-text>
+                15 min
+              </v-list-item-action-text>
+            </v-list-item>
+          </v-list>
+      </v-menu>
       <v-menu offset-x>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
@@ -79,6 +97,7 @@
         selectedItem: 0,
         mini: false,
         messages: 1,
+        menuClose: false,
         navigationItems: [
           { text: 'Home', icon: 'mdi-home' },
           { text: 'Chat', icon: 'mdi-message-reply-text' },

@@ -1,14 +1,14 @@
 <template>
   <v-container fluid style="padding: 0;">
     <v-row no-gutters>
-      <v-col sm="4" class="scrollable">
-        <v-toolbar flat class="py-0" short>
+      <v-col sm="4" :class="listClass">
+        <v-toolbar flat class="py-0" short >
           <v-text-field prepend-inner-icon="mdi-magnify" rounded filled dense class="mt-6"></v-text-field>
-          <v-btn icon class="ml-1">
+          <v-btn icon class="ml-1" @click="myWatch = !myWatch">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-list two-line subheader>
+        <v-list two-line subheader class="scrollable">
           <v-subheader>Recent chat</v-subheader>
           <v-list-item-group v-model="selected">
             <v-list-item v-for="(item,index) in items" :key="index">
@@ -27,25 +27,35 @@
           </v-list-item-group>
         </v-list>
       </v-col>
-      <v-col sm="8" class="d-flex flex-column">
+      <v-col sm="8" :class="chatClass">
         <v-toolbar flat short class="chat-header">
           <v-avatar size="40">
             <v-img src="https://madewithvuejs.com/mandant/madewithvuejs/images/logo.png"></v-img>
           </v-avatar>
           <v-toolbar-title class="pl-1">Mohammad Sharief</v-toolbar-title>
+          <v-progress-linear :active="progress" absolute bottom indeterminate color="primary"></v-progress-linear>
           <v-spacer></v-spacer>
-          <v-menu>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn v-bind="attrs" v-on="on" icon>
-                <v-icon>mdi-attachment</v-icon>
+          <v-speed-dial direction="bottom">
+            <template v-slot:activator>
+              <v-btn icon>
+                <v-icon>
+                  mdi-attachment
+                </v-icon>
               </v-btn>
             </template>
-            <v-list>
-              <v-list-item v-for="(item, index) in attachmentItems" :key="index">
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+            <v-btn fab dark small color="green" >
+              <v-icon>mdi-image</v-icon>
+            </v-btn>
+            <v-btn fab dark small color="indigo" >
+              <v-icon>mdi-music</v-icon>
+            </v-btn>
+            <v-btn fab dark small color="red">
+              <v-icon>mdi-video</v-icon>
+            </v-btn>
+            <v-btn fab dark small color="blue" >
+              <v-icon>mdi-file</v-icon>
+            </v-btn>
+          </v-speed-dial>
           <v-menu offset-x>
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" icon>
@@ -60,10 +70,15 @@
           </v-menu>
         </v-toolbar>
         <div class="chat-box">
-
+          <div v-for="(item) in messageItems" :class="item.sent? 'message-sent':'message-received'" :key="item.id">
+            <div :class="item.sent? 'message-sent-content':'message-received-content'">{{item.message}}</div>
+          </div>
         </div>
         <v-toolbar flat class="chat-controls">
-          <v-text-field dense rounded filled prepend-inner-icon="mdi-emoticon" class="message-field mt-6"></v-text-field>
+          <v-btn icon>
+            <v-icon>mdi-emoticon</v-icon>
+          </v-btn>
+          <v-text-field dense rounded filled class="message-field mt-6"></v-text-field>
           <v-btn icon>
             <v-icon>mdi-send</v-icon>
           </v-btn>
@@ -76,9 +91,25 @@
 <script>
 
 export default{
+  watch: {
+    myWatch() {
+      // if (this.$route.path === '/') {
+      if (this.myWatch === true){
+        this.listClass = ''
+        this.chatClass = 'flex-column d-none d-sm-flex'
+      } else {
+        this.listClass = 'd-none d-sm-block'
+        this.chatClass = 'd-flex flex-column'
+      }
+    }
+  },
   data() {
     return {
+      myWatch : false,
+      listClass: '',
+      chatClass: 'flex-column d-none d-sm-flex',
       selected: [2],
+      progress: false,
       menuItems: [
         { title: 'Click Me' },
         { title: 'Click Me' },
@@ -318,6 +349,128 @@ export default{
           "message": "arcu. Vivamus sit",
           "new": 62
         }
+      ],
+      messageItems: [
+        {
+          "id": "302C3273-541D-ADDD-7844-EFEDD8DE4EFB",
+          "message": "molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque.",
+          "sent": true
+        },
+        {
+          "id": "6F10B232-ADB3-F989-936C-5DC2D0576CC6",
+          "message": "ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis. Nulla tempor augue ac ipsum. Phasellus vitae",
+          "sent": false
+        },
+        {
+          "id": "403EAE82-2736-003A-9C7C-C7355ED0D387",
+          "message": "eu elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum ante",
+          "sent": true
+        },
+        {
+          "id": "EBB4BE7B-60EF-332C-A28B-28335F8F481C",
+          "message": "facilisis non, bibendum sed,",
+          "sent": false
+        },
+        {
+          "id": "0348288F-2DD4-93CF-88F6-76BC9CA045E5",
+          "message": "in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus ornare. Fusce mollis. Duis sit amet diam",
+          "sent": true
+        },
+        {
+          "id": "18926D66-D27A-BFB3-C5F5-A99171668F71",
+          "message": "fames ac turpis egestas. Aliquam",
+          "sent": false
+        },
+        {
+          "id": "79ABA225-E7CB-B65A-E87C-B4D0A4587905",
+          "message": "egestas nunc sed libero. Proin",
+          "sent": true
+        },
+        {
+          "id": "749D12EC-6DFB-B4CB-A53B-DB9F69F64411",
+          "message": "fames ac turpis egestas. Aliquam fringilla cursus purus. Nullam",
+          "sent": true
+        },
+        {
+          "id": "28C0B7D1-9233-7DA9-E4D5-0835710CE6F3",
+          "message": "at auctor ullamcorper, nisl arcu iaculis enim, sit amet ornare lectus justo eu arcu. Morbi sit amet massa. Quisque porttitor eros nec tellus. Nunc lectus",
+          "sent": true
+        },
+        {
+          "id": "ACA73286-AB44-9306-7FD8-747C04AE469B",
+          "message": "dictum eleifend, nunc risus varius orci, in consequat enim diam vel arcu. Curabitur ut odio vel est tempor",
+          "sent": false
+        },
+        {
+          "id": "F16A19A0-23E8-8D2C-C7B3-67700F3E00B5",
+          "message": "ultrices",
+          "sent": true
+        },
+        {
+          "id": "8E3F418E-F264-DE67-9F9D-980401FED879",
+          "message": "lorem, auctor quis, tristique ac, eleifend vitae, erat. Vivamus nisi. Mauris nulla. Integer urna. Vivamus",
+          "sent": false
+        },
+        {
+          "id": "64A1B8D6-0593-BE6E-1D9F-8BD1EB5B6AAD",
+          "message": "sem elit, pharetra ut, pharetra sed, hendrerit a, arcu. Sed et libero. Proin mi. Aliquam gravida mauris ut mi. Duis risus odio,",
+          "sent": false
+        },
+        {
+          "id": "F0172383-201E-4A34-EB79-1C2C8D42ACBA",
+          "message": "vitae purus gravida sagittis. Duis gravida. Praesent eu nulla at sem molestie sodales.",
+          "sent": false
+        },
+        {
+          "id": "70E43831-709A-6A19-2923-9EFF6817C5AE",
+          "message": "sagittis augue, eu tempor erat",
+          "sent": true
+        },
+        {
+          "id": "608CAD57-3857-4197-FF2B-84ABB6B144BE",
+          "message": "lobortis tellus justo",
+          "sent": false
+        },
+        {
+          "id": "C7C924B9-DDDC-ACEC-C48D-030F92BD3965",
+          "message": "pede. Nunc sed orci lobortis augue scelerisque",
+          "sent": true
+        },
+        {
+          "id": "58857F54-0BA6-61B7-CF1E-315751F044AE",
+          "message": "id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu",
+          "sent": true
+        },
+        {
+          "id": "73CC0033-74D9-B553-C5C1-98DAF007C62B",
+          "message": "eget tincidunt dui augue",
+          "sent": false
+        },
+        {
+          "id": "5FBB9297-A394-CFD8-CD12-733C077C8573",
+          "message": "bibendum ullamcorper. Duis cursus, diam at",
+          "sent": true
+        },
+        {
+          "id": "2BAEEDF5-372C-4208-CE11-FA3742CA2A87",
+          "message": "erat",
+          "sent": true
+        },
+        {
+          "id": "09372D2D-316D-6315-CFEB-D704B5A444CB",
+          "message": "Sed eu eros. Nam consequat dolor vitae dolor. Donec fringilla. Donec feugiat metus sit amet ante. Vivamus non",
+          "sent": true
+        },
+        {
+          "id": "D0CCBC57-1A44-F7C1-1412-BFE8DD7EFC9D",
+          "message": "magnis",
+          "sent": false
+        },
+        {
+          "id": "EE6919DE-0BD8-3480-1C04-EDF57FE8D0F8",
+          "message": "pharetra ut, pharetra sed, hendrerit a, arcu. Sed et libero. Proin mi. Aliquam gravida",
+          "sent": true
+        }
       ]
     }
   }
@@ -325,9 +478,11 @@ export default{
 </script>
 
 <style scoped>
+
 .scrollable {
   overflow-y: auto;
-  height: calc(100vh - 3.5rem)
+  height: calc(100vh - 7rem);
+  scrollbar-width: thin;
 }
 .chat-header {
   flex: 0;
@@ -337,8 +492,56 @@ export default{
 }
 .chat-box {
   flex: 1;
+  overflow-y: auto;
+  background: white;
+  min-height: calc(100vh - 11rem);
+  max-height: calc(100vh - 11rem);
+  padding: 0 10px;
 }
 .message-field {
   flex: 1;
+}
+
+.message-sent {
+  padding: 5px;
+	display: grid;
+	grid-template-columns: 85%;
+	justify-items: end;
+  border-radius: 15px 0 15px 15px;
+  justify-content: end;
+}
+.message-received {
+  padding: 5px;
+	display: grid;
+	grid-template-columns: 85%;
+  justify-items: start;
+  border-radius: 0px 15px 15px 15px;
+}
+.message-sent-content {
+  border-radius: 15px 15px 0px 15px;
+  background-color: #0275d8;
+  color: white;
+  padding: 5px 10px;
+}
+.message-received-content {
+  border-radius: 0px 15px 15px 15px;
+  background-color: #f7f7f7;
+  padding: 5px 10px;
+}
+
+.chat-box::-webkit-scrollbar-track
+{
+	border-radius: 7px;
+	background-color: #F5F5F5;
+}
+.chat-box::-webkit-scrollbar
+{
+	width: 7px;
+	background-color: #F5F5F5;
+}
+.chat-box::-webkit-scrollbar-thumb
+{
+	border-radius: 7px;
+	background-color: #d3d3d3;
 }
 </style>
