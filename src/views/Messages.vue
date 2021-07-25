@@ -91,6 +91,7 @@
 <script>
 
 export default{
+  name: 'Messages',
   watch: {
     myWatch() {
       // if (this.$route.path === '/') {

@@ -1,14 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
-    component: Home
+    component: () => import(/* webpackChunkName: "messages" */ '../views/Messages.vue')
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+    component: () => import(/* webpackChunkName: "messages" */ '../views/Messages.vue')
+  },
+  {
+    path: '/explore',
+    name: 'Explore',
+    component: () => import(/* webpackChunkName: "explore" */ '../views/Messages.vue')
+  },
+  {
+    path: '/friends',
+    name: 'Friends',
+    component: () => import(/* webpackChunkName: "friends" */ '../views/Friends.vue')
   },
   {
     path: '/about',
