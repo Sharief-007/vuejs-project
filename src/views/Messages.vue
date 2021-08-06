@@ -75,10 +75,15 @@
           </div>
         </div>
         <v-toolbar flat class="chat-controls">
-          <v-btn icon>
-            <v-icon>mdi-emoticon</v-icon>
-          </v-btn>
-          <v-text-field dense rounded filled class="message-field mt-6"></v-text-field>
+        <v-menu close-on-content-click="false" close-on-click="false" offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on"><v-icon>mdi-palette</v-icon></v-btn>
+            </template>
+            <v-card>
+              <VEmojiPicker @select="selectEmoji" />
+            </v-card>
+        </v-menu>
+          <v-text-field dense rounded filled class="message-field mt-6" v-model="messageText"></v-text-field>
           <v-btn icon>
             <v-icon>mdi-send</v-icon>
           </v-btn>
@@ -89,9 +94,12 @@
 </template>
 
 <script>
-
+import { VEmojiPicker } from 'v-emoji-picker';
 export default{
   name: 'Messages',
+  components: {
+    VEmojiPicker
+  },
   watch: {
     myWatch() {
       // if (this.$route.path === '/') {
@@ -104,8 +112,15 @@ export default{
       }
     }
   },
+  methods: {
+    selectEmoji(emoji) {
+      this.messageText += emoji.data
+      console.log(emoji.data)
+    }
+  },
   data() {
     return {
+      messageText : '',
       myWatch : false,
       listClass: '',
       chatClass: 'flex-column d-none d-sm-flex',
@@ -545,4 +560,6 @@ export default{
 	border-radius: 7px;
 	background-color: #d3d3d3;
 }
+
+
 </style>
