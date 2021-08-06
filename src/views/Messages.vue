@@ -75,14 +75,32 @@
           </div>
         </div>
         <v-toolbar flat class="chat-controls">
-        <v-menu close-on-content-click="false" close-on-click="false" offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on"><v-icon>mdi-palette</v-icon></v-btn>
-            </template>
-            <v-card>
-              <VEmojiPicker @select="selectEmoji" />
-            </v-card>
-        </v-menu>
+          <emoji-picker @emoji="insert" :search="search" >
+            <span class="emoji-invoker" slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" @click.stop="clickEvent">
+                <v-btn icon><v-icon>mdi-emoticon</v-icon></v-btn>
+            </span>
+            <div slot="emoji-picker" slot-scope="{ emojis, insert }" class="emoji-picker">
+                <v-card style="max-width:375px;min-width:375px">
+                    <v-tabs v-model="tab" center-active show-arrows>
+                        <v-tab v-for="(emojiGroup, category) in emojis" :key="category">
+                        <v-icon>{{ tabIcons[category] }}</v-icon>
+                        </v-tab>
+                    </v-tabs>
+                    <v-text-field v-model="search" placeholder="Search emoji" class="mb-n5 mt-1 mx-3" rounded outlined dense flat></v-text-field>
+                    <v-tabs-items v-model="tab">
+                        <v-tab-item v-for="(emojiGroup, category) in emojis" :key="category">
+                            <v-card style="min-height:15rem;max-height:15rem;overflow-y:auto">
+                                <v-card-text class="ma-2">
+                                    <v-btn v-for="(emoji, emojiName) in emojiGroup" :key="emojiName" @click="insert(emoji)" :title="emojiName" class="text-h6" icon dark>
+                                        {{ emoji }}
+                                    </v-btn>
+                                </v-card-text>
+                            </v-card>
+                        </v-tab-item>
+                    </v-tabs-items>
+                </v-card>
+            </div>
+          </emoji-picker>
           <v-text-field dense rounded filled class="message-field mt-6" v-model="messageText"></v-text-field>
           <v-btn icon>
             <v-icon>mdi-send</v-icon>
@@ -94,11 +112,11 @@
 </template>
 
 <script>
-import { VEmojiPicker } from 'v-emoji-picker';
+import EmojiPicker from 'vue-emoji-picker'
 export default{
   name: 'Messages',
   components: {
-    VEmojiPicker
+    EmojiPicker
   },
   watch: {
     myWatch() {
@@ -113,14 +131,17 @@ export default{
     }
   },
   methods: {
-    selectEmoji(emoji) {
-      this.messageText += emoji.data
-      console.log(emoji.data)
+    insert(emoji) {
+      this.messageText += emoji
+      console.log(EmojiPicker)
     }
   },
   data() {
     return {
+      input:'',
+      tab: null,
       messageText : '',
+      search: '',
       myWatch : false,
       listClass: '',
       chatClass: 'flex-column d-none d-sm-flex',
@@ -139,6 +160,14 @@ export default{
         { title: 'Contact' },
         { title: 'Document' }
       ],
+      tabIcons : {
+        "People":"mdi-emoticon-happy-outline",
+        "Nature":"mdi-flower",
+        "Objects":"mdi-tools",
+        "Places":"mdi-car",
+        "Symbols":"mdi-symbol",
+        "Frequently used":"mdi-history"
+      },
       items: [
         {
           "name": "Jenna Cochran",
@@ -562,4 +591,11 @@ export default{
 }
 
 
+
+.emoji-picker {
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  bottom: 0%;
+}
 </style>
