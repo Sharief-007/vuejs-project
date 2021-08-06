@@ -45,9 +45,10 @@
                 <v-list-item-title>Lorem ipsum dolor sit amet consectetur adipisicing elit. </v-list-item-title>
                 <v-list-item-subtitle v-text="new Date().toLocaleString()"></v-list-item-subtitle>
               </v-list-item-content>
-              <v-list-item-action-text>
-                15 min
-              </v-list-item-action-text>
+              <v-row justify="end" style="max-width: 60px">
+                <v-btn icon small><v-icon>mdi-check</v-icon></v-btn>
+                <v-btn icon small><v-icon>mdi-close</v-icon></v-btn>
+              </v-row>
             </v-list-item>
           </v-list>
       </v-menu>
@@ -102,6 +103,7 @@
         ],
         menuItems: [
           { text: 'Profile', icon: 'mdi-account', },
+          { text: 'Themes', icon: 'mdi-palette' },
           { text: 'Sign Out', icon: 'mdi-export' }
         ]
       }

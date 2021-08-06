@@ -1,9 +1,11 @@
 <template>
   <v-card class="rootView">
-    <v-tabs v-model="tab" centered>
+    <v-tabs v-model="tab">
       <v-tabs-slider></v-tabs-slider>
       <v-tab href="#tab-1"><v-icon left small>mdi-account-group</v-icon>Friends</v-tab>
       <v-tab href="#tab-2"><v-icon left small>mdi-account-clock</v-icon>Requests</v-tab>
+      <v-spacer></v-spacer>
+      <v-textfield filled rounded></v-textfield>
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item :value="friendsTab" class="scrollable">
