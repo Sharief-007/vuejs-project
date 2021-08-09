@@ -12,11 +12,20 @@
 
       <v-col cols="12" sm="8" class="scrollable">
         <v-card class="mx-auto mb-3" v-for="n in 10" :key="n">
-          <v-card-title>
-            <v-avatar size="35" left>
-              <v-img class="elevation-6" alt="" src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"></v-img>
-          </v-avatar>
-            <span class="text-h6 text-light">John Doe</span>
+          <v-list dense>
+<!--          <v-card-title>-->
+<!--            <v-avatar size="35" left>-->
+<!--              <v-img  alt="" src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"></v-img>-->
+<!--          </v-avatar>-->
+<!--            <span class="text-h6 text-light">John Doe</span>-->
+            <v-list-item>
+              <v-list-item-avatar>
+                <v-img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"></v-img>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title>John Doe</v-list-item-title>
+                <v-list-item-subtitle>Amsterdam</v-list-item-subtitle>
+              </v-list-item-content>
           <v-spacer></v-spacer>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
@@ -28,7 +37,9 @@
               </v-list-item>
             </v-list>
           </v-menu>
-      </v-card-title>
+<!--      </v-card-title>-->
+            </v-list-item>
+          </v-list>
 <!--      <v-card-text class="text-h5 font-weight-bold">-->
 <!--      <v-card-text>-->
         <v-hover v-slot="{ hover }">
@@ -37,7 +48,7 @@
 <!--            <v-img :src="color" max-height="100%" max-width="100%"></v-img>-->
             </v-carousel-item>
             <v-carousel-item>
-              <video controls autoplay loop src="https://vod-progressive.akamaized.net/exp=1628547960~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1006%2F13%2F330033045%2F1295489177.mp4~hmac=75e7cfe075e8e9d469f65d868e69fdfd1fcb01197008e5cd6dca30553632da06/vimeo-prod-skyfire-std-us/01/1006/13/330033045/1295489177.mp4?download=1&filename=Pexels+Videos+2141798.mp4"></video>
+              <video height="100%" width="100%" autoplay loop src="https://vod-progressive.akamaized.net/exp=1628547960~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1006%2F13%2F330033045%2F1295489177.mp4~hmac=75e7cfe075e8e9d469f65d868e69fdfd1fcb01197008e5cd6dca30553632da06/vimeo-prod-skyfire-std-us/01/1006/13/330033045/1295489177.mp4?download=1&filename=Pexels+Videos+2141798.mp4"></video>
             </v-carousel-item>
           </v-carousel>
         </v-hover>
