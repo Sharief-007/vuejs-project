@@ -19,10 +19,10 @@
                 <v-list-item-title v-text="item.name"></v-list-item-title>
                 <v-list-item-subtitle v-text="item.message"></v-list-item-subtitle>
               </v-list-item-content>
-              <v-list-action-item>
+              <v-list-item-action>
 <!--                <v-list-item-action-text v-text="item.new"></v-list-item-action-text>-->
-                <v-badge color="primary" dot></v-badge>
-              </v-list-action-item>
+                <v-badge color="primary" :content="item.new"></v-badge>
+              </v-list-item-action>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -80,7 +80,7 @@
                 <v-btn icon><v-icon>mdi-emoticon</v-icon></v-btn>
             </span>
             <div slot="emoji-picker" slot-scope="{ emojis, insert }" class="emoji-picker">
-                <v-card style="max-width:375px;min-width:375px">
+                <v-card :max-width="$vuetify.breakpoint.smAndDown? '100vw' : '375px'">
                     <v-tabs v-model="tab" center-active show-arrows>
                         <v-tab v-for="(emojiGroup, category) in emojis" :key="category">
                         <v-icon>{{ tabIcons[category] }}</v-icon>
@@ -596,6 +596,7 @@ export default{
   position: absolute;
   z-index: 1;
   box-sizing: border-box;
-  bottom: 0%;
+  bottom: 100%;
+  left: 0%;
 }
 </style>

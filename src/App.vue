@@ -28,27 +28,25 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Application</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-menu :close-on-content-click="menuClose" offset-y max-height="80vh">
+      <v-menu :close-on-content-click="menuClose"
+              offset-y max-height="95vh"
+              :max-width="$vuetify.breakpoint.smAndDown ? '100vw' : '30rem'">
         <template v-slot:activator="{ on, attrs }">
         <v-btn icon v-bind="attrs" v-on="on">
-          <v-badge overlap dot color="green">
+          <v-badge overlap color="green" content="9">
             <v-icon>mdi-bell</v-icon>
           </v-badge>
         </v-btn>
         </template>
-           <v-list>
-            <v-list-item v-for="n in 15" :key="n">
+           <v-list two-line>
+            <v-list-item v-for="n in 15" :key="n" link>
               <v-list-item-avatar>
                 <v-img src="https://imgproxy.xopic.de/F1Q76pHTmWqVjzQJZLKQwHnnzRXO1wTZJ2W5MKEks7Q/fit/600/300/ce/false/aHR0cHM6Ly9zMy54/b3BpYy5kZS9vcGVu/c2FwLXB1YmxpYy9j/b3Vyc2VzLzdrMnEw/elhSNkNDbURuTXVC/NVZGZGkvdmlzdWFs/X3YyLmpwZw.jpg"></v-img>
               </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title>Lorem ipsum dolor sit amet consectetur adipisicing elit. </v-list-item-title>
-                <v-list-item-subtitle v-text="new Date().toLocaleString()"></v-list-item-subtitle>
-              </v-list-item-content>
-              <v-row justify="end" style="max-width: 60px">
-                <v-btn icon small><v-icon>mdi-check</v-icon></v-btn>
-                <v-btn icon small><v-icon>mdi-close</v-icon></v-btn>
-              </v-row>
+              <v-list-item-content>Mark Zuckerberg has sent you a friend request.</v-list-item-content>
+              <v-list-item-action-text>
+                <span>15 mins</span>
+              </v-list-item-action-text>
             </v-list-item>
           </v-list>
       </v-menu>
@@ -72,7 +70,7 @@
               </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
-              <v-list-item v-for="(item,i) in menuItems" :key="i" link dense>
+              <v-list-item v-for="(item,i) in menuItems" :key="i" link dense :to="item.to">
                   <v-list-item-title><v-icon left>{{item.icon}}</v-icon>{{item.text}}</v-list-item-title>
               </v-list-item>
           </v-list>
@@ -102,7 +100,7 @@
           { text: 'Explore', icon: 'mdi-magnify', to : { name : 'Explore'} }
         ],
         menuItems: [
-          { text: 'Profile', icon: 'mdi-account', },
+          { text: 'Profile', icon: 'mdi-account', to : { name : 'Profile'} },
           { text: 'Themes', icon: 'mdi-palette' },
           { text: 'Sign Out', icon: 'mdi-export' }
         ]

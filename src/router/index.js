@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '../views/Home'
+import Messages from "../views/Messages";
+import Friends from "../views/Friends";
+import Profile from "../views/Profile";
 
 Vue.use(VueRouter)
 
@@ -7,12 +11,12 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "messages" */ '../views/Home.vue')
+    component: Home   //() => import(/* webpackChunkName: "messages" */ '../views/Home.vue')
   },
   {
     path: '/messages',
     name: 'Messages',
-    component: () => import(/* webpackChunkName: "messages" */ '../views/Messages.vue')
+    component: Messages //() => import(/* webpackChunkName: "messages" */ '../views/Messages.vue')
   },
   {
     path: '/explore',
@@ -22,7 +26,12 @@ const routes = [
   {
     path: '/friends',
     name: 'Friends',
-    component: () => import(/* webpackChunkName: "friends" */ '../views/Friends.vue')
+    component: Friends//() => import(/* webpackChunkName: "friends" */ '../views/Friends.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile//() => import(/* webpackChunkName: "friends" */ '../views/Profile.vue')
   },
   {
     path: '/about',

@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-row class="full-height">
-      <v-col cols="12" sm="2">
+      <v-col cols="12" sm="2" class="d-none d-sm-block">
         <v-sheet rounded="lg" min-height="268">
 
         </v-sheet>
-        <v-sheet rounded="lg" min-height="268" class="my-3 d-none d-sm-block">
+        <v-sheet rounded="lg" min-height="268" class="my-3">
 
         </v-sheet>
       </v-col>
@@ -16,7 +16,7 @@
             <v-avatar size="35" left>
               <v-img class="elevation-6" alt="" src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"></v-img>
           </v-avatar>
-          <span class="text-h6 text-light">John Doe</span>
+            <span class="text-h6 text-light">John Doe</span>
           <v-spacer></v-spacer>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
@@ -29,23 +29,20 @@
             </v-list>
           </v-menu>
       </v-card-title>
-      <v-card-text class="text-h5 font-weight-bold">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur ipsa assumenda saepe veniam officia vitae beatae iusto voluptatum, doloribus distinctio nobis officiis pariatur ipsum iste quos tempora voluptates rerum voluptate!</v-card-text>
+<!--      <v-card-text class="text-h5 font-weight-bold">-->
+<!--      <v-card-text>-->
+        <v-hover v-slot="{ hover }">
+          <v-carousel touch="true" show-arrows-on-hover :hide-delimiters="!hover">
+            <v-carousel-item v-for="(color,i) in colors" :key="i" :src="color">
+<!--            <v-img :src="color" max-height="100%" max-width="100%"></v-img>-->
+            </v-carousel-item>
+            <v-carousel-item>
+              <video controls autoplay loop src="https://vod-progressive.akamaized.net/exp=1628547960~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1006%2F13%2F330033045%2F1295489177.mp4~hmac=75e7cfe075e8e9d469f65d868e69fdfd1fcb01197008e5cd6dca30553632da06/vimeo-prod-skyfire-std-us/01/1006/13/330033045/1295489177.mp4?download=1&filename=Pexels+Videos+2141798.mp4"></video>
+            </v-carousel-item>
+          </v-carousel>
+        </v-hover>
+<!--      </v-card-text>-->
       <v-card-actions>
-        <!-- <v-list-item class="grow">
-          <v-list-item-avatar color="grey darken-3">
-            <v-img class="elevation-6" alt="" src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"></v-img>
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title>Evan You</v-list-item-title>
-          </v-list-item-content>
-          <v-row align="center" justify="end">
-            <v-btn icon class="mr-1"><v-icon>mdi-heart</v-icon></v-btn>
-            <span class="subheading mr-2">256</span>
-            <span class="mr-1">·</span>
-            <v-btn icon class="mr-1"><v-icon> mdi-share-variant</v-icon></v-btn>
-            <span class="subheading">45</span>
-          </v-row>
-        </v-list-item> -->
         <div>
             <v-btn icon class="mr-1"><v-icon>mdi-heart</v-icon></v-btn>
             <span class="subheading mr-2">256</span>
@@ -57,7 +54,7 @@
     </v-card>
   </v-col>
 
-  <v-col cols="12" sm="2">
+  <v-col cols="12" sm="2" class="d-none d-sm-block">
     <v-sheet rounded="lg" min-height="268">
       <!--  -->
     </v-sheet>
@@ -73,6 +70,12 @@ export default {
         return {
             links: ['Dashboard','Messages','Profile','Updates'],
             items: [{ title: 'Click Me' },{ title: 'Click Me' },{ title: 'Click Me' },{ title: 'Click Me 2' },],
+            colors: [
+              'https://images.pexels.com/photos/6373757/pexels-photo-6373757.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+              'https://images.pexels.com/photos/8769659/pexels-photo-8769659.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+              'https://images.pexels.com/photos/2387660/pexels-photo-2387660.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+              'https://images.pexels.com/photos/3082731/pexels-photo-3082731.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
+            ]
         }
     }
 }
