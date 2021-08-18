@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/explore',
     name: 'Explore',
-    component: () => import(/* webpackChunkName: "explore" */ '../views/Messages.vue')
+    component: () => import(/* webpackChunkName: "explore" */ '../views/Explore.vue')
   },
   {
     path: '/friends',

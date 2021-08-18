@@ -37,7 +37,7 @@
           </v-badge>
         </v-btn>
         </template>
-           <v-list two-line :width="$vuetify.breakpoint.smAndDown ? 'auto' : '30rem'">
+           <v-list two-line :width="$vuetify.breakpoint.smAndUp? '30rem' : 'auto'">
             <v-list-item v-for="n in 15" :key="n" link>
               <v-list-item-avatar>
                 <v-img src="https://imgproxy.xopic.de/F1Q76pHTmWqVjzQJZLKQwHnnzRXO1wTZJ2W5MKEks7Q/fit/600/300/ce/false/aHR0cHM6Ly9zMy54/b3BpYy5kZS9vcGVu/c2FwLXB1YmxpYy9j/b3Vyc2VzLzdrMnEw/elhSNkNDbURuTXVC/NVZGZGkvdmlzdWFs/X3YyLmpwZw.jpg"></v-img>
