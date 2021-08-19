@@ -35,6 +35,24 @@
           <v-toolbar-title class="pl-1">Mohammad Sharief</v-toolbar-title>
           <v-progress-linear :active="progress" absolute bottom indeterminate color="primary"></v-progress-linear>
           <v-spacer></v-spacer>
+          <v-dialog v-model="dialog" >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-on="on" v-bind="attrs" @click="showCamera"><v-icon>mdi-video</v-icon></v-btn>
+            </template>
+            <v-card>
+<!--              <v-card-title class="text-h5">-->
+<!--                Use Google's location service?-->
+<!--              </v-card-title>-->
+              <v-card-text class="d-flex">
+                <video class="ma-auto" ref="videoElement"></video>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" text @click="stopCamera">Disagree</v-btn>
+                <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <v-speed-dial direction="bottom">
             <template v-slot:activator>
               <v-btn icon>
@@ -134,10 +152,25 @@ export default{
     insert(emoji) {
       this.messageText += emoji
       console.log(EmojiPicker)
+    },
+    showCamera() {
+      const constraints = (window.constraints = {
+        audio: false,
+        video: true
+      });
+      navigator.mediaDevices
+          .getUserMedia(constraints)
+          .then(stream => {
+            this.$refs.videoElement.srcObject = stream;
+            this.$refs.videoElement.play()
+          }).catch(error => {
+        alert("Browser doesn't support or there is some errors." + error);
+      });
     }
   },
   data() {
     return {
+      dialog: false,
       input:'',
       tab: null,
       messageText : '',

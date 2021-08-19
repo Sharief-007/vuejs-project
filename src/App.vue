@@ -64,13 +64,35 @@
                 <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John"/>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title>John Leider</v-list-item-title>
+                <v-list-item-title class="text-h6">John Leider</v-list-item-title>
                 <v-list-item-subtitle>Founder of Vuetify</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
-              <v-list-item v-for="(item,i) in menuItems" :key="i" link dense :to="item.to">
-                  <v-list-item-title><v-icon left>{{item.icon}}</v-icon>{{item.text}}</v-list-item-title>
+<!--              <v-list-item v-for="(item,i) in menuItems" :key="i" link dense :to="item.to">-->
+<!--                  <v-list-item-title><v-icon left>{{item.icon}}</v-icon>{{item.text}}</v-list-item-title>-->
+<!--              </v-list-item>-->
+              <v-list-item link :to="menuItems[0].to">
+                <v-list-item-title><v-icon left v-text="menuItems[0].icon"></v-icon>{{menuItems[0].text}}</v-list-item-title>
+              </v-list-item>
+            <v-bottom-sheet v-model="sheet" inset>
+              <template v-slot:activator="{ on, attrs }">
+                <v-list-item link v-bind="attrs" v-on="on">
+                  <v-list-item-title><v-icon left v-text="menuItems[1].icon"></v-icon>{{menuItems[1].text}}</v-list-item-title>
+                </v-list-item>
+              </template>
+              <v-list dense>
+                <v-list-item>
+                  <v-list-item-icon><v-icon>mdi-weather-night</v-icon></v-list-item-icon>
+                  <v-list-item-content>Enable dark theme</v-list-item-content>
+                  <v-list-item-action>
+                    <v-switch></v-switch>
+                  </v-list-item-action>
+                </v-list-item>
+              </v-list>
+            </v-bottom-sheet>
+              <v-list-item link :to="menuItems[2].to">
+                <v-list-item-title><v-icon left v-text="menuItems[2].icon"></v-icon>{{menuItems[2].text}}</v-list-item-title>
               </v-list-item>
           </v-list>
         </v-card>
@@ -92,6 +114,7 @@
         mini: false,
         messages: 1,
         menuClose: false,
+        sheet: false,
         navigationItems: [
           { text: 'Home', icon: 'mdi-home', to : { name: 'Home'} },
           { text: 'Chat', icon: 'mdi-message-reply-text', to : { name : 'Messages'} },
