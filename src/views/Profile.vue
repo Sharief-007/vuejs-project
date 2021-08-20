@@ -48,9 +48,16 @@
           <v-container>
             <v-row>
               <v-col v-for="image in images" :key="image" :cols="$vuetify.breakpoint.smAndUp? '3':'6'">
-                <v-card>
-                  <v-img :src="image"></v-img>
-                </v-card>
+                <v-hover v-slot="{ hover }">
+                  <v-card>
+                      <v-img :src="image" :style="hover? 'opacity:1':'opacity:0.65'">
+                        <v-app-bar color="transparent">
+                          <v-spacer></v-spacer>
+                          <v-btn icon v-if="hover"><v-icon class="show-btns" color="grey">mdi-open-in-new</v-icon></v-btn>
+                        </v-app-bar>
+                      </v-img>
+                    </v-card>
+                  </v-hover>
               </v-col>
             </v-row>
           </v-container>
@@ -104,5 +111,8 @@ export default {
 }
 .scrollable::-webkit-scrollbar {
   display: none;
+}
+.show-btns {
+  color: rgba(255, 255, 255, 1) !important;
 }
 </style>

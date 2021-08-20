@@ -16,7 +16,7 @@
                     <v-card-title class="text-h5">Halcyon Days</v-card-title>
                     <v-card-subtitle>Ellie Goulding</v-card-subtitle>
                     <v-card-actions>
-                      <v-btn class="ml-2 mt-2" rounded small color="primary">Message</v-btn>
+                      <v-btn class="ml-2 mt-2" text color="primary">Message</v-btn>
                         <v-menu>
                           <template v-slot:activator="{ on, attrs }">
                             <v-btn class="ml-2 mt-2" v-bind="attrs" v-on="on" icon><v-icon>mdi-dots-vertical</v-icon></v-btn>
@@ -51,8 +51,8 @@
                     <v-card-title class="text-h5">Halcyon Days</v-card-title>
                     <v-card-subtitle>Ellie Goulding</v-card-subtitle>
                     <v-card-actions>
-                      <v-btn class="ml-2 mt-2" outlined rounded small color="primary">Confirm</v-btn>
-                      <v-btn class="ml-2 mt-2" outlined rounded small color="error">Delete</v-btn>
+                      <v-btn class="ml-2 mt-2" text color="primary">Confirm</v-btn>
+                      <v-btn class="ml-2 mt-2" text color="error">Delete</v-btn>
                     </v-card-actions>
                   </div>
                   <v-avatar class="ma-3" size="110">
